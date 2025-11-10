@@ -1,12 +1,12 @@
-# 🧩 Script Google Sheets — Détection de Marques avec l’API Dandelion
+# 🧩 Script Google Sheets — Détection de marques avec l’API Dandelion
 
-## 🎯 Objectif
+## Objectif
 
 Ce script Google Apps Script permet de **détecter automatiquement la présence d’une marque ou d’une organisation** dans une cellule Google Sheets grâce à l’API **Dandelion**.  
 
 Il renvoie :
-- `VRAI` → une marque ou organisation est détectée  
-- `FAUX` → aucune marque détectée  
+- `TRUE` → une marque ou organisation est détectée  
+- `FALSE` → aucune marque détectée  
 - `"-"` → la cellule est vide  
 
 ---
@@ -32,7 +32,7 @@ Il renvoie :
 
 
 
-   # Utilisation dans Google Sheets
+# Utilisation dans Google Sheets
 
 Cette section décrit comment utiliser le script et ses fonctions directement dans Google Sheets pour détecter la présence de marques dans du texte.
 
