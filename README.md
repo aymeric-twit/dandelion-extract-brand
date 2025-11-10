@@ -17,13 +17,18 @@ Il renvoie :
 1. Ouvre ta feuille **Google Sheets**.  
 2. Clique sur **Extensions → Apps Script**.  
 3. Supprime tout contenu existant.  
-4. Colle le contenu du fichier `Code.gs`.  
+4. Colle le contenu du fichier `dandelion.js`.  
 5. Enregistre (**Ctrl + S** / **⌘ + S**).
 
-### Étape 2 : enregistrer ton token Dandelion
+### Étape 2 : créer un compte sur Dandelion pour accéder à l'API https://dandelion.eu/
+
+### Étape 3 : enregistrer ton token Dandelion
 1. Dans l’éditeur Apps Script, choisis la fonction `setDandelionToken` et exécute-la.  
 2. Autorise l’accès si nécessaire.  
 3. Entre ton token personnel :
 
    ```javascript
    setDandelionToken("TON_TOKEN_DANDELION_ICI");
+
+
+   
