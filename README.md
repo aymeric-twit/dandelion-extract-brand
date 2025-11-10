@@ -5,26 +5,25 @@
 Ce script Google Apps Script permet de **détecter automatiquement la présence d’une marque ou d’une organisation** dans une cellule Google Sheets grâce à l’API **Dandelion**.  
 
 Il renvoie :
-- `VRAI` → une marque/organisation est détectée  
+- `VRAI` → une marque ou organisation est détectée  
 - `FAUX` → aucune marque détectée  
-- `"-"` → cellule vide  
+- `"-"` → la cellule est vide  
 
 ---
 
 ## ⚙️ Installation du script
 
-### 1️⃣ Ouvrir l’éditeur de scripts
+### Étape 1 : ouvrir l’éditeur de scripts
 1. Ouvre ta feuille **Google Sheets**.  
 2. Clique sur **Extensions → Apps Script**.  
-3. Supprime le contenu existant.  
-4. Colle l’intégralité du script (`Code.gs`) dans l’éditeur.  
-5. Enregistre avec **Ctrl + S** ou **⌘ + S**.
+3. Supprime tout contenu existant.  
+4. Colle le contenu du fichier `Code.gs`.  
+5. Enregistre (**Ctrl + S** / **⌘ + S**).
 
----
+### Étape 2 : enregistrer ton token Dandelion
+1. Dans l’éditeur Apps Script, choisis la fonction `setDandelionToken` et exécute-la.  
+2. Autorise l’accès si nécessaire.  
+3. Entre ton token personnel :
 
-### 2️⃣ Ajouter ton token Dandelion
-1. Dans l’éditeur Apps Script, clique sur **Exécuter → Exécuter la fonction → setDandelionToken**.  
-2. Autorise l’accès si demandé.  
-3. Ajoute ton token Dandelion dans le code :
    ```javascript
    setDandelionToken("TON_TOKEN_DANDELION_ICI");
