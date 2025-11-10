@@ -32,106 +32,112 @@ Il renvoie :
 
 
 
-
-   Utilisation dans Google Sheets
+   # Utilisation dans Google Sheets
 
 Cette section décrit comment utiliser le script et ses fonctions directement dans Google Sheets pour détecter la présence de marques dans du texte.
 
-▶️ Détection simple
+## ▶️ Détection simple
 
 Vérifie si une marque est détectée dans une cellule :
 
+```
 =BRAND_PRESENT(A2)
+```
 
-
-Résultat :
-
-VRAI → une marque est détectée
-
-FAUX → aucune marque détectée
-
-"-" → la cellule est vide
+**Résultat :**
+- `VRAI` → une marque est détectée
+- `FAUX` → aucune marque détectée
+- `"-"` → la cellule est vide
 
 Tu peux aussi ajuster la langue (fr, en, it, etc.) et le niveau de confiance (entre 0 et 1) :
 
+```
 =BRAND_PRESENT(A2;"fr";0.5)
+```
 
+### Exemples :
 
-Exemples :
+| Texte dans A2 | Formule utilisée | Résultat |
+|---------------|------------------|----------|
+| Nike Air Max | `=BRAND_PRESENT(A2)` | VRAI |
+| J'adore mon sac à dos | `=BRAND_PRESENT(A2)` | FAUX |
+| (cellule vide) | `=BRAND_PRESENT(A2)` | "-" |
 
-Texte dans A2	Formule utilisée	Résultat
-Nike Air Max	=BRAND_PRESENT(A2)	VRAI
-J’adore mon sac à dos	=BRAND_PRESENT(A2)	FAUX
-(cellule vide)	=BRAND_PRESENT(A2)	"-"
-📋 Liste des marques détectées
+---
 
-Affiche toutes les marques reconnues dans le texte d’une cellule :
+## 📋 Liste des marques détectées
 
+Affiche toutes les marques reconnues dans le texte d'une cellule :
+
+```
 =BRAND_LIST(A2)
+```
 
+**Fonctionnement :**
+- Analyse le contenu de la cellule pour trouver toutes les marques mentionnées.
+- Retourne une liste verticale de marques détectées.
+- Si aucune marque n'est trouvée, renvoie `"-"`.
 
-Fonctionnement :
+### Exemples :
 
-Analyse le contenu de la cellule pour trouver toutes les marques mentionnées.
+| Texte dans A2 | Formule utilisée | Résultat |
+|---------------|------------------|----------|
+| Je porte un pull Nike et un sac Adidas | `=BRAND_LIST(A2)` | Nike<br>Adidas |
+| Un café au Starbucks avec mon iPhone | `=BRAND_LIST(A2)` | Starbucks<br>Apple |
+| J'aime le café maison | `=BRAND_LIST(A2)` | "-" |
 
-Retourne une liste verticale de marques détectées.
+---
 
-Si aucune marque n’est trouvée, renvoie "-".
-
-Exemples :
-
-Texte dans A2	Formule utilisée	Résultat
-Je porte un pull Nike et un sac Adidas	=BRAND_LIST(A2)	Nike
-Adidas
-Un café au Starbucks avec mon iPhone	=BRAND_LIST(A2)	Starbucks
-Apple
-J’aime le café maison	=BRAND_LIST(A2)	"-"
-🧠 Détection intelligente (avec ta propre liste)
+## 🧠 Détection intelligente (avec ta propre liste)
 
 Combine la détection Dandelion avec ta liste personnalisée de marques locales.
+
 Cette méthode améliore la précision et reconnaît les marques mal identifiées (par exemple ba&sh).
 
-Crée une nouvelle feuille appelée Brands.
+### Configuration :
 
-Ajoute ta liste de marques dans la colonne A :
+1. Crée une nouvelle feuille appelée **Brands**.
+2. Ajoute ta liste de marques dans la colonne A :
 
-A
------
-ba&sh
-Zara
-Uniqlo
-H&M
-Dior
+| A |
+|---|
+| ba&sh |
+| Zara |
+| Uniqlo |
+| H&M |
+| Dior |
 
+3. Utilise la formule suivante :
 
-Utilise la formule suivante :
-
+```
 =BRAND_PRESENT_SMART(A2;Brands!A:A)
+```
 
+**Paramètres :**
+- `A2` → cellule contenant le texte à analyser
+- `Brands!A:A` → plage de ta liste personnalisée de marques
 
-Paramètres :
+**Résultat :**
+- `VRAI` → marque trouvée par Dandelion ou dans ta liste
+- `FAUX` → aucune marque trouvée
+- `"-"` → cellule vide
 
-A2 → cellule contenant le texte à analyser
+### Exemples :
 
-Brands!A:A → plage de ta liste personnalisée de marques
+| Texte dans A2 | Formule utilisée | Résultat |
+|---------------|------------------|----------|
+| bash polo | `=BRAND_PRESENT_SMART(A2;Brands!A:A)` | VRAI (détecte ba&sh) |
+| chemise Zara femme | `=BRAND_PRESENT_SMART(A2;Brands!A:A)` | VRAI |
+| pull sans marque | `=BRAND_PRESENT_SMART(A2;Brands!A:A)` | FAUX |
+| (cellule vide) | `=BRAND_PRESENT_SMART(A2;Brands!A:A)` | "-" |
 
-Résultat :
+---
 
-VRAI → marque trouvée par Dandelion ou dans ta liste
+## 🧩 Résumé rapide des fonctions
 
-FAUX → aucune marque trouvée
+| Fonction | Description | Exemple | Résultat |
+|----------|-------------|---------|----------|
+| `BRAND_PRESENT(text; [lang]; [min_confiance])` | Détection automatique via l'API Dandelion | `=BRAND_PRESENT(A2;"fr";0.6)` | VRAI / FAUX / "-" |
+| `BRAND_LIST(text; [lang]; [min_confiance])` | Liste toutes les marques détectées | `=BRAND_LIST(A2)` | Liste verticale ou "-" |
+| `BRAND_PRESENT_SMART(text; brandRange; [lang]; [min_confiance])` | Combine Dandelion + ta liste locale | `=BRAND_PRESENT_SMART(A2;Brands!A:A)` | VRAI / FAUX / "-
 
-"-" → cellule vide
-
-Exemples :
-
-Texte dans A2	Formule utilisée	Résultat
-bash polo	=BRAND_PRESENT_SMART(A2;Brands!A:A)	VRAI (détecte ba&sh)
-chemise Zara femme	=BRAND_PRESENT_SMART(A2;Brands!A:A)	VRAI
-pull sans marque	=BRAND_PRESENT_SMART(A2;Brands!A:A)	FAUX
-(cellule vide)	=BRAND_PRESENT_SMART(A2;Brands!A:A)	"-"
-🧩 Résumé rapide des fonctions
-Fonction	Description	Exemple	Résultat
-BRAND_PRESENT(text; [lang]; [min_confiance])	Détection automatique via l’API Dandelion	=BRAND_PRESENT(A2;"fr";0.6)	VRAI / FAUX / "-"
-BRAND_LIST(text; [lang]; [min_confiance])	Liste toutes les marques détectées	=BRAND_LIST(A2)	Liste verticale ou "-"
-BRAND_PRESENT_SMART(text; brandRange; [lang]; [min_confiance])	Combine Dandelion + ta liste locale	=BRAND_PRESENT_SMART(A2;Brands!A:A)	VRAI / FAUX / "-"
